@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+
+body{
+    background-color: rgb(110, 110, 110);
+}
+.container{
+    height: 600px;
+    width: 600px;
+    background-color: rgb(77, 77, 77);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.square{
+    height: 200px;
+    width: 200px;
+    border: 1px solid #aaa;
+    box-sizing: border-box;
+    background-color: rgb(167, 20, 20);
+    cursor: pointer;
+
+}
+
+.circle{
+    background-image: url(circle-regular.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: none;
+    pointer-events: none
+}
+.times{
+    background-image: url(times-solid.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: none;
+    pointer-events: none
+}
+
+</style>
+<body>
+    
+
+<div class="container">
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+</div>
+
+
+<script>
+
+let turn =0;
+let board= [,,,,,,,,];
+const winningCombinations = [
+    [0,1,2], [3,4,5], [6,7,8],
+    [0,3,6], [1,4,7], [2,5,8],
+    [0,4,8], [2,4,6]
+    ]
+const player1 = 'circle';
+const player2 = 'times';
+
+const squares = document.querySelectorAll('.square');
+
+squares.forEach(square=>square.addEventListener('click', enable));
+
+
+function enable (e){
+let indexOfClicked =[...e.target.parentElement.children].indexOf(e.target);
+const player =turn%2==0 ? player1:player2;
+board[indexOfClicked]=player;
+e.target.classList.add(player);
+turn++;
+check()
+}
+
+
+
+function check(){
+    let p1Indexes = [];
+    let p2Indexes = [];
+
+    board.forEach((e,index)=>{
+        if(e=='circle'){
+            p1Indexes.push(index);
+        }else if(e=='times'){
+            p2Indexes.push(index)
+        }
+        
+    })
+  
+winningCombinations.forEach(combination=>{
+    if(combination.every(e=>p1Indexes.includes(e))){
+        console.log('Player1 Winns');
+        squares.forEach(square=>square.removeEventListener('click', enable)) 
+    }
+    if(combination.every(e=>p2Indexes.includes(e))){
+        console.log('Player2 Winns');
+        squares.forEach(square=>square.removeEventListener('click', enable)) 
+    }
+})
+
+}
+
+
+
+    
+</script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+
+body{
+    background-color: rgb(110, 110, 110);
+}
+.container{
+    height: 600px;
+    width: 600px;
+    background-color: rgb(77, 77, 77);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.square{
+    height: 200px;
+    width: 200px;
+    border: 1px solid #aaa;
+    box-sizing: border-box;
+    background-color: rgb(167, 20, 20);
+    cursor: pointer;
+
+}
+
+.circle{
+    background-image: url(circle-regular.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: none;
+    pointer-events: none
+}
+.times{
+    background-image: url(times-solid.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: none;
+    pointer-events: none
+}
+
+</style>
+<body>
+    
+
+<div class="container">
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+</div>
+
+
+<script>
+
+const squares = document.querySelectorAll('.square');
+let turn = 0;
+const player1 = 'circle';
+const player2 = 'times';
+const board = [,,,,,,,,];
+const player1Board = [];
+const player2Board = [];
+let player;
+
+
+squares.forEach(square=>square.addEventListener('click',mark))
+
+
+
+function mark(e){
+turn++;
+
+let squareIndex =[...e.target.parentElement.children].indexOf(e.target);
+
+turn%2 == 1? player = player1: player=player2
+
+e.target.classList.add(player)
+
+board[squareIndex]= player
+
+
+if(turn%2 == 1){
+    player1Board.push(squareIndex)
+}else{
+    player2Board.push(squareIndex)
+}
+
+console.log(player1Board)
+console.log(player2Board)
+
+check()
+}
+
+function check(){
+
+let winningCombinations = [[0,1,2], [3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+winningCombinations.forEach(group=>group.every(index=>{
+    
+}))
+
+}   
+
+</script>
+
+</body>
+</html>
+
+
