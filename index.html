@@ -5,50 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
-<style>
 
-body{
-    background-color: rgb(110, 110, 110);
-}
-.container{
-    height: 600px;
-    width: 600px;
-    background-color: rgb(77, 77, 77);
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    display: flex;
-    flex-wrap: wrap;
-    
-}
-.square{
-    height: 200px;
-    width: 200px;
-    border: 1px solid #aaa;
-    box-sizing: border-box;
-    background-color: rgb(167, 20, 20);
-    cursor: pointer;
-
-}
-
-.circle{
-    background-image: url(circle-regular.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    cursor: none;
-    pointer-events: none
-}
-.times{
-    background-image: url(times-solid.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    cursor: none;
-    pointer-events: none
-}
-
-</style>
 <body>
     
 
@@ -63,7 +22,7 @@ body{
     <div class="square"></div>
     <div class="square"></div>
 </div>
-
+<button class="restartBtn">Restart Game</button>
 
 <script>
 
@@ -99,8 +58,7 @@ if(turn%2 == 1){
     player2Board.push(squareIndex)
 }
 
-console.log(player1Board)
-console.log(player2Board)
+
 
 check()
 }
@@ -109,11 +67,17 @@ function check(){
 
 let winningCombinations = [[0,1,2], [3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 
-winningCombinations.forEach(group=>group.every(index=>{
-    
-}))
-
-}   
+winningCombinations.forEach(group=>{
+if(group.every(winningIndex=>player1Board.includes(winningIndex))){
+console.log('player1 winns')
+squares.forEach(square=>square.classList.add('inactive'))
+}
+if(group.every(winningIndex=>player2Board.includes(winningIndex))){
+console.log('player2 winns');
+squares.forEach(square=>square.classList.add('inactive'))
+}
+}) 
+}  
 
 </script>
 

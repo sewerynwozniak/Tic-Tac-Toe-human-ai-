@@ -1,0 +1,59 @@
+body {
+  background-color: #6e6e6e;
+}
+
+.container {
+  height: 50vw;
+  width: 50vw;
+  background-color: #4d4d4d;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.square {
+  height: calc(50vw/3);
+  width: calc(50vw/3);
+  border: 1px solid #aaa;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #a71414;
+  cursor: pointer;
+}
+
+.restartBtn {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+.circle {
+  background-image: url(../circle-regular.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: none;
+  pointer-events: none;
+}
+
+.times {
+  background-image: url(../times-solid.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: none;
+  pointer-events: none;
+}
+
+.inactive {
+  cursor: none;
+  pointer-events: none;
+}
+/*# sourceMappingURL=style.css.map */

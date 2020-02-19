@@ -1,0 +1,57 @@
+$containerSize: 50vw;
+
+
+
+
+body{
+    background-color: rgb(110, 110, 110);
+}
+.container{
+    height: $containerSize;
+    width: $containerSize;
+    background-color: rgb(77, 77, 77);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.square{
+    height: calc(#{$containerSize}/3);
+    width: calc(#{$containerSize}/3);
+    border: 1px solid #aaa;
+    box-sizing: border-box;
+    background-color: rgb(167, 20, 20);
+    cursor: pointer;
+
+}
+
+.restartBtn{
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translateX(-50%);
+    
+
+}
+
+.circle{
+    background-image: url(../circle-regular.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: none;
+    pointer-events: none
+}
+.times{
+    background-image: url(../times-solid.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: none;
+    pointer-events: none
+}
+.inactive{
+    cursor: none;
+    pointer-events: none
+}
