@@ -10,6 +10,7 @@
 
 <body>
     
+<div class="alertBox">Player 1 wins</div>    
 
 <div class="container">
     <div class="square"></div>
@@ -22,22 +23,24 @@
     <div class="square"></div>
     <div class="square"></div>
 </div>
-<button class="restartBtn">Restart Game</button>
+<button class="restartBtn">Restart</button>
 
 <script>
 
 const squares = document.querySelectorAll('.square');
+const buttonRestart = document.querySelector('.restartBtn');
+const alertBox = document.querySelector('.alertBox');
 let turn = 0;
 const player1 = 'circle';
 const player2 = 'times';
-const board = [,,,,,,,,];
+const board = [];
 const player1Board = [];
 const player2Board = [];
 let player;
 
 
 squares.forEach(square=>square.addEventListener('click',mark))
-
+buttonRestart.addEventListener('click', restartGame)
 
 
 function mark(e){
@@ -58,10 +61,10 @@ if(turn%2 == 1){
     player2Board.push(squareIndex)
 }
 
-
-
 check()
 }
+
+
 
 function check(){
 
@@ -69,15 +72,35 @@ let winningCombinations = [[0,1,2], [3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4
 
 winningCombinations.forEach(group=>{
 if(group.every(winningIndex=>player1Board.includes(winningIndex))){
-console.log('player1 winns')
+alert('Player 1')
 squares.forEach(square=>square.classList.add('inactive'))
 }
 if(group.every(winningIndex=>player2Board.includes(winningIndex))){
-console.log('player2 winns');
+alert('Player 2')
 squares.forEach(square=>square.classList.add('inactive'))
 }
 }) 
 }  
+
+function restartGame(){
+
+    squares.forEach(square=>square.classList.remove('inactive', 'circle', 'times'));
+    player1Board.length=0;
+    player2Board.length=0;
+    board.length=0;
+    turn = 0;
+    alertBox.textContent = ``
+    alertBox.style.animation = '';
+    
+}
+
+
+function alert(winner){
+
+alertBox.textContent = `${winner} wins!`
+alertBox.style.animation = 'alertBox 3s';
+
+}
 
 </script>
 

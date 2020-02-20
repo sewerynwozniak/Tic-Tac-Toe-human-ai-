@@ -1,11 +1,27 @@
 $containerSize: 50vw;
 
 
-
-
 body{
     background-color: rgb(110, 110, 110);
 }
+
+.alertBox{
+    
+    top: 60px;
+    height: 50px;
+    width: 150px;
+    margin: 60px auto;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.541);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all;
+    
+}
+
 .container{
     height: $containerSize;
     width: $containerSize;
@@ -19,8 +35,8 @@ body{
     
 }
 .square{
-    height: calc(#{$containerSize}/3);
-    width: calc(#{$containerSize}/3);
+    height: $containerSize/3;
+    width: $containerSize/3;
     border: 1px solid #aaa;
     box-sizing: border-box;
     background-color: rgb(167, 20, 20);
@@ -33,8 +49,17 @@ body{
     top: 85%;
     left: 50%;
     transform: translateX(-50%);
-    
+    height: 40px;
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.452);
+    border-radius: 5px;
+    color: #fff;
+    border: none;
+    font-size: 18px;
 
+&:hover{
+    cursor: pointer;
+}
 }
 
 .circle{
@@ -42,7 +67,8 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     cursor: none;
-    pointer-events: none
+    pointer-events: none;
+    
 }
 .times{
     background-image: url(../times-solid.svg);
@@ -54,4 +80,23 @@ body{
 .inactive{
     cursor: none;
     pointer-events: none
+}
+
+@keyframes alertBox{
+
+  
+    10%{
+        opacity: 1;
+        transform: scale(1.29);
+    
+        
+    }
+    90%{
+        opacity: 1;
+        transform: scale(1.29);
+      
+        
+    }
+   
+
 }
