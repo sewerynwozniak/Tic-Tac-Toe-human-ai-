@@ -5,6 +5,7 @@ class TicTacToe{
         this.createBoard();
         this.selectElements();
         this.events();   
+        this.winningCells=null;
     }
 
 
@@ -17,7 +18,7 @@ class TicTacToe{
     computerMove(){
         let bestScore = -1;
         let index;
-        
+       
 
         for(let i=0;i<this.board.length;i++){
 
@@ -32,6 +33,7 @@ class TicTacToe{
                 this.board[i]=null
                 this.timesBoard.pop()
 
+                this.togglePlayer()
                 this.board[i]='cicrcle'
                 this.circleBoard.push(i.toString())
                 let oScore = this.ifCanWin()
@@ -41,7 +43,7 @@ class TicTacToe{
                 }
                 this.board[i]=null
                 this.circleBoard.pop()
-
+                this.togglePlayer()
             }
 
             
@@ -52,24 +54,27 @@ class TicTacToe{
         this.cells[index].classList.add('times')
 
 
-        console.log(this.checkWin())
 
         if(this.checkWin()){
             this.stopGame()
+            this.highlightWinningCombination()
             this.showNotification(this.checkWin())
             return
         }
+        this.togglePlayer()
 
     }
 
 
     ifCanWin(){
         const score ={
-            X:10,
-            O:5,
+            'times':10,
+            'circle':5,
             'tie':0,
             null:0
         }
+
+        
 
         return score[this.checkWin()]
 
@@ -83,18 +88,20 @@ class TicTacToe{
         const winningCombinations = [['0','1','2'], ['3','4','5'], ['6','7','8'], ['0','3','6'], ['1','4','7'], ['2','5','8'], ['0','4','8'], ['6','4','2']]
 
 
+        const currentPlayerBoard = {
+            circle: this.circleBoard,
+            times: this.timesBoard
+        }
+
+
         for( let arr of winningCombinations){
-            if(arr.every(el=>this.circleBoard.includes(el))){
-               return 'O';
+            if(arr.every(el=>currentPlayerBoard[this.currentPlayer].includes(el))){
+                this.winningCells=arr;
+               return this.currentPlayer;
             }  
         }
 
   
-        for( let arr of winningCombinations){
-            if(arr.every(el=>this.timesBoard.includes(el))){
-               return 'X';
-            }  
-        }
 
         if((this.board.filter(el=>el===null).length)==0){
             return 'tie';
@@ -129,16 +136,17 @@ class TicTacToe{
 
 
     selectCell = (e)=>{
-          
         const cellNr = e.target.dataset.cell;
         this.board[cellNr]=this.currentPlayer;
-        this.circleBoard.push(cellNr);
         e.target.classList.add(this.currentPlayer)
+        this.circleBoard.push(cellNr);
+        
         if(this.checkWin()){
             this.stopGame()
             this.showNotification(this.checkWin())
             return
         }    
+        this.togglePlayer()
         this.computerMove()
 
     }
@@ -152,13 +160,19 @@ class TicTacToe{
     }
 
 
-    highlightWinningCombination(arr){
-        arr.map(str=>Number(str)).forEach(el=>this.cells[el].classList.add('cell--win'))
+    highlightWinningCombination(){
+        if(this.winningCells){
+            this.winningCells.map(str=>Number(str)).forEach(el=>this.cells[el].classList.add('cell--win'))
+        }     
     }
 
     clearBoardStyling(){
         this.cells.forEach(cell=>cell.classList.remove('circle', 'times', 'cell--win', 'inactive'))
         this.notification.classList.remove('notification--active')
+    }
+
+    togglePlayer(){
+        this.currentPlayer == 'circle'? this.currentPlayer='times':this.currentPlayer='circle'
     }
 
 

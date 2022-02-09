@@ -5,7 +5,7 @@ class TicTacToe{
         this.createBoard();
         this.selectElements();
         this.events();   
-
+        this.winningCells=null;
     }
 
 
@@ -44,7 +44,6 @@ class TicTacToe{
         this.board[cellNr]=this.currentPlayer;
         e.target.classList.add(this.currentPlayer)
         this.currentPlayer == 'circle'? this.circleBoard.push(cellNr):this.timesBoard.push(cellNr)
-        console.log(this.checkWin()) 
         this.togglePlayer()
     }
 
@@ -59,9 +58,9 @@ class TicTacToe{
 
          winningCombinations.forEach(arr=>{
              if(arr.every(el=>currentPlayerBoard[this.currentPlayer].includes(el))){
-
+                this.winningCells=arr
                  this.stopGame()
-                 this.highlightWinningCombination(arr)
+                 this.highlightWinningCombination()
                  this.showNotification()
              }
          })
@@ -77,8 +76,10 @@ class TicTacToe{
     }
 
 
-    highlightWinningCombination(arr){
-        arr.map(str=>Number(str)).forEach(el=>this.cells[el].classList.add('cell--win'))
+    highlightWinningCombination(){
+        if(this.winningCells){
+        this.winningCells.map(str=>Number(str)).forEach(el=>this.cells[el].classList.add('cell--win'))
+        }     
     }
 
     clearBoardStyling(){

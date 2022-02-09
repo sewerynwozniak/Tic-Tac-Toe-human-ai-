@@ -1,0 +1,49 @@
+@use 'sass:math';
+$boardSize: 300px;
+
+.board{
+    height: $boardSize;
+    width: $boardSize;
+    position: relative;
+    margin: 50px auto;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+
+
+.cell{
+    height: math.div($boardSize, 3);
+    flex-basis: math.div($boardSize, 3);
+    border: 1px solid #aaa;
+    box-sizing: border-box;
+    background-color: rgb(250, 250, 250);
+    cursor: pointer;
+
+
+    &--win{
+        background-color: rgb(218, 218, 218);
+    }
+
+}
+
+
+.circle{
+    background-image: url(../circle-regular.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: none;
+    pointer-events: none;
+    
+}
+.times{
+    background-image: url(../times-solid.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: none;
+    pointer-events: none
+}
+.inactive{
+    cursor: default;
+}

@@ -1,0 +1,22 @@
+.btn{
+    border: none;  
+    margin: 10px;
+    text-decoration: none;
+    background-color: rgba(15, 100, 156, 0.801);
+    color: rgb(241, 241, 241);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 170px;
+    height: 40px;
+
+    &--center{
+        margin: 50px auto;
+    }
+
+
+    &:hover{
+        cursor: pointer;
+    }
+}

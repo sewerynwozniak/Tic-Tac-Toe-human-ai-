@@ -1,4 +1,6 @@
-<div class="notification"></div>    
+<div class="notification"></div> 
+
+<a class='btn' href="index.php">main</a>
 
 <div class="board">
     <div data-cell='0' class="cell"></div>
@@ -12,4 +14,4 @@
     <div data-cell='8' class="cell"></div>
 </div>
 
-<button class="restartBtn">Restart</button>
+<button class="btn btn--center restartBtn">Restart</button>
